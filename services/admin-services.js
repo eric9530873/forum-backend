@@ -19,7 +19,7 @@ const adminServices = {
 
                 return restaurant.destroy()
             })
-            .then((deleteRestaurant) => cd(null, { restaurant: deleteRestaurant }))
+            .then((deleteRestaurant) => cb(null, { restaurant: deleteRestaurant }))
             .catch(err => cb(err))
     }
 }
