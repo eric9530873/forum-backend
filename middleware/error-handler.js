@@ -21,5 +21,6 @@ module.exports = {
                 message: `${err}`
             })
         }
+        next(err)
     }
 }
