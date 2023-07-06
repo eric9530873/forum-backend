@@ -7,6 +7,9 @@ const adminController = {
     },
     deleteRestaurant: (req, res, next) => {
         adminServices.deleteRestaurant(req, (err, data) => err ? next(err) : res.json({ status: 'success', data }))
+    },
+    postRestaurants: (req, res, next) => {
+        adminServices.postRestaurant(req, (err, data) => err ? next(err) : res.json({ status: 'success', data }))
     }
 }
 
