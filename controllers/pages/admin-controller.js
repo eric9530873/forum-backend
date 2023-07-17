@@ -1,5 +1,5 @@
 const { Restaurant, User, Category } = require('../../models')
-const { localFileHandler } = require('../../helpers/file-helpers')
+const { imgurFileHandler } = require('../../helpers/file-helpers')
 
 const adminServices = require('../../services/admin-services')
 
@@ -14,25 +14,13 @@ const adminController = {
             .then(categories => res.render('admin/create-restaurant', { categories }))
             .catch(err => next(err))
     },
-    postRestaurant: (req, res, next) => {
-        if (!req.body.name) throw new Error('Restaurant name is required')
+    postRestaurants: (req, res, next) => {
+        adminServices.postRestaurant(req, (err, data) => {
+            if (err) return next(err)
 
-        localFileHandler(req.file).then(filePath => {
-            return Restaurant.create({
-                name: req.body.name,
-                tel: req.body.tel,
-                address: req.body.address,
-                openingHours: req.body.openingHours,
-                description: req.body.description,
-                image: filePath || null,
-                categoryId: req.body.categoryId
-            })
+            req.flash('success_messages', 'restaurant was successfully created')
+            res.redirect('/admin/restaurants', { status: 'success', data })
         })
-            .then(() => {
-                req.flash('success_msg', 'restaurant was successfully created')
-                res.redirect('/admin/restaurants')
-            })
-            .catch(err => next(err))
     },
     getRestaurant: (req, res, next) => {
         Restaurant.findByPk(req.params.id, {
@@ -61,7 +49,7 @@ const adminController = {
 
         Promise.all([
             Restaurant.findByPk(req.params.id),
-            localFileHandler(req.file)
+            imgurFileHandler(req.file)
         ])
             .then(([restaurant, filePath]) => {
                 if (!restaurant) throw new Error("Restaurant didn't exist")

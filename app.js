@@ -1,13 +1,17 @@
+require('dotenv').config()
+
 const express = require('express')
 const { pages, apis } = require('./routes')
+
 
 const app = express()
 const port = process.env.PORT || 3000
 
+
 const methodOverride = require('method-override')
 app.use(methodOverride('_method'))
 app.use(express.urlencoded({ extended: true }))
-
+app.use(express.json())
 
 const session = require('express-session')
 const SESSION_SECRET = 'secret'

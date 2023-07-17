@@ -12,7 +12,7 @@ router.put('/restaurants/:id', upload.single('image'), adminController.putRestau
 router.delete('/restaurants/:id', adminController.deleteRestaurant)
 router.get('/restaurants/:id/edit', adminController.editRestaurant)
 router.get('/restaurants', adminController.getRestaurants)
-router.post('/restaurants', upload.single('image'), adminController.postRestaurant)
+router.post('/restaurants', upload.single('image'), adminController.postRestaurants)
 
 router.get('/users', adminController.getUsers)
 router.put('/users/:id', adminController.PutUsers)

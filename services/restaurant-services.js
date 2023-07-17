@@ -47,6 +47,89 @@ const restaurantServices = {
                 })
             })
             .catch(err => callback(err))
+    },
+    getRestaurant: (req, cb) => {
+        Restaurant.findByPk(req.params.id, {
+            include: [
+                Category,
+                { model: Comment, include: User },
+                { model: User, as: 'FavoritedUsers' },
+                { model: User, as: 'LikedUsers' }
+            ],
+        })
+            .then(restaurant => {
+                if (!restaurant) throw new Error("Restaurant didn't exist")
+
+                return restaurant.increment('viewCount')
+
+            })
+            .then(restaurant => {
+                const isFavorited = restaurant.FavoritedUsers.some(f => f.id === req.user.id)
+                // const favoritedRestaurantsId = req.user && req.user.FavoritedRestaurants.map(fr => fr.id)
+                const isLiked = restaurant.LikedUsers.some(l => l.id === req.user.id)
+                cb(null, {
+                    restaurant: restaurant,
+                    isFavorited,
+                    isLiked
+                })
+            })
+            .catch(err => cb(err))
+    },
+    getDashboard: (req, cb) => {
+        Restaurant.findByPk(req.params.id, {
+            include: Category,
+        })
+            .then(restaurant => {
+                if (!restaurant) throw new Error("Restaurant didn't exist")
+
+                cb(null, restaurant)
+            })
+            .catch(err => cb(err))
+    },
+    getFeeds: (req, cb) => {
+        Promise.all([
+            Restaurant.findAll({
+                limit: 10,
+                order: [['createdAt', 'DESC']],
+                include: [Category],
+                raw: true,
+                nest: true
+            }),
+            Comment.findAll({
+                limit: 10,
+                order: [['createdAt', 'DESC']],
+                include: [User, Restaurant],
+                raw: true,
+                nest: true
+            })
+        ])
+            .then(([restaurants, comments]) => {
+                cb(null, {
+                    restaurants,
+                    comments
+                })
+            })
+            .catch(err => cb(err))
+    },
+    getTopRestaurants: (req, cb) => {
+
+        Restaurant.findAll({
+            include: [
+                { model: User, as: 'FavoritedUsers' }
+            ]
+        })
+            .then(restaurants => {
+                restaurants = restaurants.map(restaurant => ({
+                    ...restaurant.toJSON(),
+                    description: restaurant.description.substring(0, 50),
+                    favoritesCount: restaurant.FavoritedUsers.length,
+                    isFavorited: req.user && req.user.FavoritedRestaurants.map(d => d.id).includes(restaurant.id)
+                }))
+                restaurants.sort((a, b) => b.favoritesCount - a.favoritesCount)
+                restaurants = restaurants.slice(0, 10)
+                return cb(null, restaurants)
+            })
+            .catch(err => cb(err))
     }
 }
 

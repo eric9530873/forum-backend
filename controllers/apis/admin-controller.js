@@ -10,6 +10,15 @@ const adminController = {
     },
     postRestaurants: (req, res, next) => {
         adminServices.postRestaurant(req, (err, data) => err ? next(err) : res.json({ status: 'success', data }))
+    },
+    putRestaurant: (req, res, next) => {
+        adminServices.putRestaurant(req, (err, data) => err ? next(err) : res.json({ status: 'success', data }))
+    },
+    getUsers: (req, res, next) => {
+        adminServices.getUsers(req, (err, data) => err ? next(err) : res.json({ status: 'success', data }))
+    },
+    PutUsers: (req, res, next) => {
+        adminServices.PutUsers(req, (err, data) => err ? next(err) : res.json({ status: 'success', data }))
     }
 }
 
