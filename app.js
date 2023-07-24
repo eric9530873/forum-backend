@@ -7,6 +7,8 @@ const { pages, apis } = require('./routes')
 const app = express()
 const port = process.env.PORT || 3000
 
+const cors = require('cors')
+app.use(cors())
 
 const methodOverride = require('method-override')
 app.use(methodOverride('_method'))
@@ -44,6 +46,7 @@ const Handlebars = require('handlebars')
 const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access')
 app.engine('hbs', handlebars({ extname: '.hbs', helpers: handlebarsHelpers, handlebars: allowInsecurePrototypeAccess(Handlebars) }))
 app.set('view engine', 'hbs')
+
 
 
 app.listen(port, () => {
