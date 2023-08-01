@@ -6,20 +6,6 @@
                 "enableSsl": "Disabled"
             },
             "previewLimit": 50,
-            "server": "bwpxl1btjaqm84rfbuko-mysql.services.clever-cloud.com",
-            "port": 3306,
-            "driver": "MySQL",
-            "name": "bwpxl1btjaqm84rfbuko",
-            "username": "uoe8ht3nflldgeba",
-            "database": "bwpxl1btjaqm84rfbuko",
-            "password": "8QbOUxaieIQhaASB7MBh"
-        },
-        {
-            "mysqlOptions": {
-                "authProtocol": "default",
-                "enableSsl": "Disabled"
-            },
-            "previewLimit": 50,
             "server": "containers-us-west-158.railway.app",
             "port": 7748,
             "driver": "MySQL",
