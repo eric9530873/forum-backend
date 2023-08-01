@@ -15,6 +15,7 @@
     "dialect": "mysql"
   },
   "production": {
-    "use_env_variable": "Connection_URI"
+    "use_env_variable": "Connection_URI",
+    "dialect": "mysql"
   }
 }
