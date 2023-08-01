@@ -13,6 +13,20 @@
             "username": "uoe8ht3nflldgeba",
             "database": "bwpxl1btjaqm84rfbuko",
             "password": "8QbOUxaieIQhaASB7MBh"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "containers-us-west-158.railway.app",
+            "port": 7748,
+            "driver": "MySQL",
+            "database": "railway",
+            "username": "root",
+            "password": "E2Xb5tmxcAWZujM67BaO",
+            "name": "railway"
         }
     ]
 }
