@@ -8,9 +8,8 @@ const app = express()
 const port = process.env.PORT || 3000
 
 const cors = require('cors')
-app.use(cors({
-    origin: true
-}))
+app.options('*', cors())
+
 
 const methodOverride = require('method-override')
 app.use(methodOverride('_method'))
