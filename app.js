@@ -8,7 +8,18 @@ const app = express()
 const port = process.env.PORT || 3000
 
 const cors = require('cors')
-app.options('*', cors())
+const whitelist = ["https://eric9530873.github.io/"]
+const corsOptions = {
+    origin: function (origin, callback) {
+        if (!origin || whitelist.indexOf(origin) !== -1) {
+            callback(null, true)
+        } else {
+            callback(new Error("Not allowed by CORS"))
+        }
+    },
+    credentials: true,
+}
+app.use(cors(corsOptions))
 
 
 const methodOverride = require('method-override')
