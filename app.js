@@ -10,7 +10,7 @@ const port = process.env.PORT || 3000
 const cors = require('cors')
 app.options('*', cors())
 app.use(cors({
-    origin: "*"
+    origin: "https://eric9530873.github.io/forum1231"
 }))
 
 const methodOverride = require('method-override')
