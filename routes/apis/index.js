@@ -39,7 +39,7 @@ router.post('/like/:id', authenticated, userController.addLiked)
 router.delete('/following/:id', authenticated, userController.removeFollowing)
 router.post('/following/:id', authenticated, userController.addFollowing)
 
-router.post('/signup', userController.signUp)
+router.post('/signup', cors(), userController.signUp)
 router.post('/signin', passport.authenticate('local', { session: false }), userController.signIn)
 
 router.use('/', apiErrorHandler)
