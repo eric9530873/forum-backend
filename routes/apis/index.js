@@ -1,8 +1,14 @@
 const express = require('express')
-
+const app = express()
 const router = express.Router()
 const passport = require('passport')
-
+const cors = require('cors')
+const corsOptions = {
+    origin: 'https://eric9530873.github.io/',
+    optionsSuccessStatus: 200,
+}
+app.options('*', cors())
+app.use(cors(corsOptions))
 
 const admin = require('./modules/admin')
 
@@ -41,8 +47,8 @@ router.post('/like/:id', authenticated, userController.addLiked)
 router.delete('/following/:id', authenticated, userController.removeFollowing)
 router.post('/following/:id', authenticated, userController.addFollowing)
 
-router.post('/signup', userController.signUp)
-router.post('/signin', passport.authenticate('local', { session: false }), userController.signIn)
+router.post('/signup', cors(), userController.signUp)
+router.post('/signin', cors(), passport.authenticate('local', { session: false }), userController.signIn)
 
 router.use('/', apiErrorHandler)
 
