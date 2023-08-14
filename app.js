@@ -8,19 +8,15 @@ const app = express()
 const port = process.env.PORT || 3000
 
 const cors = require('cors')
-const whitelist = 'https://eric9530873.github.io/'
-const corsOptionsDelegate = function (req, callback) {
-    var corsOptions;
-    if (whitelist.indexOf(req.header('Origin')) !== -1) {
-        corsOptions = { origin: true }
-    } else {
-        corsOptions = { origin: false }
-    }
-    callback(null, corsOptions)
+const corsOptions = {
+    credentials: true,
+    origin: "https://forum-master-16.onrender.com",
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    preflightContinue: true,
 }
 
 app.options('*', cors())
-app.use(cors(corsOptionsDelegate))
+app.use(cors(corsOptions))
 
 const methodOverride = require('method-override')
 app.use(methodOverride('_method'))
