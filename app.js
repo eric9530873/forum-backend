@@ -39,7 +39,7 @@ app.use((req, res, next) => {
     res.locals.error_messages = req.flash('error_messages')
     res.locals.user = getUser(req)
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
-    res.header('Access-Control-Allow-Origin', 'https://eric9530873.github.io')
+    res.header('Access-Control-Allow-Origin:https://eric9530873.github.io')
 
     next()
 })
