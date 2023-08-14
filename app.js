@@ -10,7 +10,9 @@ const port = process.env.PORT || 3000
 const cors = require('cors')
 
 
-app.options('*', cors())
+app.options('*', cors({
+    origin: 'https://eric9530873.github.io'
+}))
 app.use(cors({
     origin: 'https://eric9530873.github.io'
 }))
