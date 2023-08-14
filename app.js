@@ -11,7 +11,9 @@ const cors = require('cors')
 
 
 app.options('*', cors())
-app.use(cors())
+app.use(cors({
+    origin: 'https://eric9530873.github.io'
+}))
 
 const methodOverride = require('method-override')
 app.use(methodOverride('_method'))
@@ -34,7 +36,7 @@ app.use((req, res, next) => {
     res.locals.success_messages = req.flash('success_messages')
     res.locals.error_messages = req.flash('error_messages')
     res.locals.user = getUser(req)
-    res.header('Access-Control-Allow-Origin', '*')
+    res.header('Access-Control-Allow-Origin', 'https://eric9530873.github.io')
     next()
 })
 
