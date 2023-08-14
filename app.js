@@ -9,10 +9,10 @@ const port = process.env.PORT || 3000
 
 const cors = require('cors')
 const corsOptions = {
-    credentials: true,
-    origin: "https://forum-master-16.onrender.com",
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-    preflightContinue: true,
+    "origin": "*",
+    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+    "preflightContinue": true,
+    "optionsSuccessStatus": 204
 }
 
 app.options('*', cors())
