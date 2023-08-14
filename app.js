@@ -12,7 +12,7 @@ const cors = require('cors')
 
 app.options('*', cors())
 app.use(cors({
-    origin: "*"
+    origin: "https://forum-master-16.onrender.com"
 }))
 
 const methodOverride = require('method-override')
@@ -36,6 +36,7 @@ app.use((req, res, next) => {
     res.locals.success_messages = req.flash('success_messages')
     res.locals.error_messages = req.flash('error_messages')
     res.locals.user = getUser(req)
+    res.header('Access-Control-Allow-Origin', 'https://forum-master-16.onrender.com')
     next()
 })
 
