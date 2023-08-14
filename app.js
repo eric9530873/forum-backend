@@ -10,14 +10,18 @@ const port = process.env.PORT || 3000
 const cors = require('cors')
 
 
-app.options('*', cors({
-    origin: 'https://eric9530873.github.io'
-}))
-app.use(cors({
-    origin: 'https://eric9530873.github.io',
-    credentials: true,
-    origin: true
-}))
+app.options('*', cors())
+var whitelist = ['https://eric9530873.github.io', 'https://eric9530873.github.io']
+var corsOptionsDelegate = function (req, callback) {
+    var corsOptions;
+    if (whitelist.indexOf(req.header('Origin')) !== -1) {
+        corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
+    } else {
+        corsOptions = { origin: false } // disable CORS for this request
+    }
+    callback(null, corsOptions) // callback expects two parameters: error and options
+}
+app.use(corsOptionsDelegate)
 
 const methodOverride = require('method-override')
 app.use(methodOverride('_method'))
@@ -40,8 +44,8 @@ app.use((req, res, next) => {
     res.locals.success_messages = req.flash('success_messages')
     res.locals.error_messages = req.flash('error_messages')
     res.locals.user = getUser(req)
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
-    res.header('Access-Control-Allow-Origin:https://eric9530873.github.io')
+    // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+    // res.header('Access-Control-Allow-Origin:https://eric9530873.github.io')
 
     next()
 })
