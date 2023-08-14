@@ -8,15 +8,12 @@ const app = express()
 const port = process.env.PORT || 3000
 
 const cors = require('cors')
-const corsOptions = {
-    "origin": "*",
-    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-    "preflightContinue": true,
-    "optionsSuccessStatus": 204
-}
+
 
 app.options('*', cors())
-app.use(cors(corsOptions))
+app.use(cors({
+    origin: "*"
+}))
 
 const methodOverride = require('method-override')
 app.use(methodOverride('_method'))
