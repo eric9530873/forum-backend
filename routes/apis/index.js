@@ -7,7 +7,7 @@ const corsOptions = {
     origin: 'https://eric9530873.github.io/',
     optionsSuccessStatus: 200,
 }
-app.options('*', cors())
+// app.options('*', cors())
 app.use(cors(corsOptions))
 
 const admin = require('./modules/admin')
