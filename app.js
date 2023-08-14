@@ -15,7 +15,7 @@ const corsOptions = {
     preflightContinue: true,
 }
 
-// app.options('*', cors())
+app.options('*', cors())
 app.use(cors(corsOptions))
 
 const methodOverride = require('method-override')
