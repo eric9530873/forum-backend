@@ -11,7 +11,7 @@ const cors = require('cors')
 
 
 
-app.use(cors({ origin: 'https://eric9530873.github.io', credentials: true, origin: true }))
+app.use(cors({ origin: ["https://eric9530873.github.io", "https://forum-master-16.onrender.com"], credentials: true, origin: true }))
 
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "https://eric9530873.github.io");
