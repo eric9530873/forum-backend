@@ -14,9 +14,9 @@ app.use((req, res, next) => {
     next();
 })
 
-app.options("*", (req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "https://eric9530873.github.io/forum1231");
-});
+// app.options("*", (req, res) => {
+//     res.setHeader("Access-Control-Allow-Origin", "https://eric9530873.github.io/forum1231");
+// });
 
 app.use(cors({
     origin: 'https://eric9530873.github.io/forum1231'
