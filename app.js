@@ -9,7 +9,7 @@ const port = process.env.PORT || 3000
 
 const cors = require('cors')
 
-app.options("*", cors());
+
 
 app.use(cors({ origin: 'https://eric9530873.github.io', credentials: true, origin: true }))
 
@@ -19,6 +19,8 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 })
+app.options("*", cors());
+
 
 const methodOverride = require('method-override')
 app.use(methodOverride('_method'))
