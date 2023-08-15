@@ -22,7 +22,9 @@ app.use(function (req, res, next) {
 
 app.options("*", cors());
 
-app.use(cors())
+app.use(cors({
+    'Access-Control-Allow-Origin': 'https://eric9530873.github.io'
+}))
 
 const methodOverride = require('method-override')
 app.use(methodOverride('_method'))
