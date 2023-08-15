@@ -9,14 +9,15 @@ const port = process.env.PORT || 3000
 
 const cors = require('cors')
 
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "https://eric9530873.github.io/forum1231");
+    next();
+})
 
 app.options('*', cors())
 
 app.use(cors({
-    origin: 'https://eric9530873.github.io/forum1231',
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    preflightContinue: false,
-    optionsSuccessStatus: 204
+    origin: 'https://eric9530873.github.io/forum1231'
 }))
 
 const methodOverride = require('method-override')
@@ -40,7 +41,6 @@ app.use((req, res, next) => {
     res.locals.success_messages = req.flash('success_messages')
     res.locals.error_messages = req.flash('error_messages')
     res.locals.user = getUser(req)
-    res.setHeader("Access-Control-Allow-Origin", "https://eric9530873.github.io/forum1231")
     next()
 })
 
