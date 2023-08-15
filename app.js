@@ -11,12 +11,11 @@ const cors = require('cors')
 
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "https://eric9530873.github.io/forum1231");
+    res.header('Access-Control-Allow-Origin-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization')
     next();
 })
 
-app.options("/", (req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "https://eric9530873.github.io/forum1231")
-});
+app.options("*", cors());
 
 app.use(cors())
 
