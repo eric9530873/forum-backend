@@ -11,7 +11,7 @@ const cors = require('cors')
 
 app.options("*", cors());
 
-app.use(cors())
+app.use(cors({ credentials: true, origin: true }))
 
 const methodOverride = require('method-override')
 app.use(methodOverride('_method'))
