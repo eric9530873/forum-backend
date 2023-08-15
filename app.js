@@ -11,7 +11,7 @@ const cors = require('cors')
 
 app.use(function (req, res, next) {
     res.setHeader("Access-Control-Allow-Origin", "https://eric9530873.github.io");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
 app.use(cors());
