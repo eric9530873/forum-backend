@@ -9,13 +9,8 @@ const port = process.env.PORT || 3000
 
 const cors = require('cors')
 
-app.use(function (req, res, next) {
-    res.setHeader("Access-Control-Allow-Origin", "https://eric9530873.github.io");
-    res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
+
 app.use(cors());
-app.options('*', cors());
 
 
 const methodOverride = require('method-override')
