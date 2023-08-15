@@ -15,10 +15,14 @@ const cors = require('cors')
 //     next();
 // })
 
-const whitelist = ['https://eric9530873.github.io']
+app.use(function (req, res, next) {
+    req.headers.origin = req.headers.origin || req.headers.host;
+    next();
+  });
+
+const whitelist = ['https://eric9530873.github.io', 'https://eric9530873.github.io']
 const corsOptions = {
     origin: function (origin, callback) {
-        console.log(origin)
         if (whitelist.indexOf(origin) !== -1) {
             callback(null, true)
         } else {
