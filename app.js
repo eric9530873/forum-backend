@@ -13,6 +13,13 @@ app.options("*", cors());
 
 app.use(cors({ origin: 'https://eric9530873.github.io', credentials: true, origin: true }))
 
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "https://eric9530873.github.io");
+    res.header('Access-Control-Allow-Methods', 'DELETE, PUT, GET, POST');
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+})
+
 const methodOverride = require('method-override')
 app.use(methodOverride('_method'))
 app.use(express.urlencoded({ extended: true }))
