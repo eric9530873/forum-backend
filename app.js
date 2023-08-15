@@ -9,15 +9,32 @@ const port = process.env.PORT || 3000
 
 const cors = require('cors')
 
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "https://eric9530873.github.io/forum1231");
-    res.header('Access-Control-Allow-Origin-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization')
-    next();
-})
+// app.use((req, res, next) => {
+//     res.header("Access-Control-Allow-Origin", "https://eric9530873.github.io/forum1231");
+//     res.header('Access-Control-Allow-Origin-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization')
+//     next();
+// })
+
+const whitelist = ['https://eric9530873.github.io']
+const corsOptions = {
+    origin: function (origin, callback) {
+        console.log(origin)
+        if (whitelist.indexOf(origin) !== -1) {
+            callback(null, true)
+        } else {
+            callback(new Error('Not allowed by CORS'))
+        }
+    }
+}
 
 app.options("*", cors());
 
-app.use(cors())
+// app.use(function (req, res, next) {
+//     req.headers.origin = req.headers.origin || req.headers.host;
+//     next();
+// });
+
+app.use(cors(corsOptions))
 
 const methodOverride = require('method-override')
 app.use(methodOverride('_method'))
