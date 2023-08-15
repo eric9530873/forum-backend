@@ -22,19 +22,7 @@ app.use(function (req, res, next) {
 
 app.options("*", cors());
 
-const whitelist = ['https://eric9530873.github.io', 'https://eric9530873.github.io']
-const corsOptionsDelegate = function (req, callback) {
-    var corsOptions;
-    console.log(whitelist.indexOf(req.header('Origin')))
-    if (whitelist.indexOf(req.header('Origin')) !== -1) {
-        corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
-    } else {
-        corsOptions = { origin: false } // disable CORS for this request
-    }
-    callback(null, corsOptions) // callback expects two parameters: error and options
-}
-
-app.use(cors(corsOptionsDelegate))
+app.use(cors())
 
 const methodOverride = require('method-override')
 app.use(methodOverride('_method'))
