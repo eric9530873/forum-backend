@@ -16,7 +16,7 @@ const cors = require('cors')
 // })
 
 app.use(function (req, res, next) {
-    req.headers.origin = req.headers.origin || req.headers.host;
+    req.header('Origin', 'https://eric9530873.github.io')
     next();
 });
 
