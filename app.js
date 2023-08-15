@@ -20,26 +20,21 @@ app.use(function (req, res, next) {
     next();
 });
 
-const whitelist = ['https://eric9530873.github.io', 'https://eric9530873.github.io']
-const corsOptions = {
-    origin: function (origin, callback) {
-        console.log(whitelist.indexOf(origin))
-        if (whitelist.indexOf(origin) !== -1) {
-            callback(null, true)
-        } else {
-            callback(new Error('Not allowed by CORS'))
-        }
-    }
-}
-
 app.options("*", cors());
 
-// app.use(function (req, res, next) {
-//     req.headers.origin = req.headers.origin || req.headers.host;
-//     next();
-// });
+const whitelist = ['https://eric9530873.github.io', 'https://eric9530873.github.io']
+const corsOptionsDelegate = function (req, callback) {
+    var corsOptions;
+    console.log(whitelist.indexOf(req.header('Origin')))
+    if (whitelist.indexOf(req.header('Origin')) !== -1) {
+        corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
+    } else {
+        corsOptions = { origin: false } // disable CORS for this request
+    }
+    callback(null, corsOptions) // callback expects two parameters: error and options
+}
 
-app.use(cors(corsOptions))
+app.use(cors(corsOptionsDelegate))
 
 const methodOverride = require('method-override')
 app.use(methodOverride('_method'))
