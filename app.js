@@ -15,6 +15,13 @@ app.all('/', function (req, res, next) {
     next();
 })
 
+app.options('*', cors({
+    origin: 'https://eric9530873.github.io'
+}))
+
+app.use(cors({
+    origin: 'https://eric9530873.github.io'
+}))
 
 const methodOverride = require('method-override')
 app.use(methodOverride('_method'))
