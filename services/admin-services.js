@@ -13,6 +13,11 @@ const adminServices = {
             .then(restaurants => cb(null, { restaurants }))
             .catch(err => cb(err))
     },
+    getRestaurant: (req, cb) => {
+        Restaurant.findByPk(req.params.id, { include: [Category] })
+            .then(restaurant => cb(null, { restaurant }))
+            .catch(err => cb(err))
+    },
     deleteRestaurant: (req, cb) => {
         Restaurant.findByPk(req.params.id)
             .then(restaurant => {

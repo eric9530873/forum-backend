@@ -77,7 +77,11 @@ const restaurantServices = {
     },
     getDashboard: (req, cb) => {
         Restaurant.findByPk(req.params.id, {
-            include: Category,
+            include: [
+                Category,
+                { model: Comment, include: User }
+            ]
+
         })
             .then(restaurant => {
                 if (!restaurant) throw new Error("Restaurant didn't exist")
@@ -112,7 +116,6 @@ const restaurantServices = {
             .catch(err => cb(err))
     },
     getTopRestaurants: (req, cb) => {
-
         Restaurant.findAll({
             include: [
                 { model: User, as: 'FavoritedUsers' }
