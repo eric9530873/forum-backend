@@ -22,7 +22,7 @@ const commentController = {
                     userId: req.user.id
                 })
             })
-            .then(() => {
+            .then((data) => {
                 res.json({ status: 'success', data })
             })
             .catch(err => next(err))
